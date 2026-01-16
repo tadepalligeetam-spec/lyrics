@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lines of the Song | Search Song Lyrics</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="logo">
+                <span class="logo-icon">✨</span> lines of the song
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+                <a href="login.html" id="login-btn" class="btn-secondary" style="text-decoration:none;">Log In</a>
+            </div>
+
+            <!-- User Menu (Hamburger) -->
+            <div id="user-menu" class="user-menu hidden">
+                <div id="hamburger-btn" class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div id="dropdown-menu" class="dropdown-menu hidden">
+                    <a href="#" id="menu-admin-link" class="dropdown-item hidden">Admin Dashboard</a>
+                    <a href="favorites.html" id="menu-favorites-link" class="dropdown-item">My Favorites</a>
+                    <a href="#" id="menu-logout-btn" class="dropdown-item">Log Out</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Search View -->
+        <main id="search-view" class="view active">
+            <div class="hero">
+                <h1>Find the words that move you.</h1>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search for songs, artists, or lyrics..."
+                        autocomplete="off">
+                    <button id="search-btn" class="btn-primary">Search</button>
+                </div>
+            </div>
+
+            <section id="results-section">
+                <h2 id="results-title">Recent Songs</h2>
+                <div id="songs-grid" class="songs-grid">
+                    <!-- Song cards injected here -->
+                </div>
+            </section>
+        </main>
+
+
+
+        <!-- Login View -->
+
+
+        <!-- Admin View -->
+        <main id="admin-view" class="view hidden">
+            <div class="admin-container">
+                <div class="admin-header">
+                    <h2>Admin Dashboard</h2>
+                    <button id="logout-btn" class="btn-secondary">Logout</button>
+                </div>
+
+                <form id="add-song-form" class="glass-card">
+                    <h3>Add New Song</h3>
+                    <div class="form-group">
+                        <label for="title">Song Title</label>
+                        <input type="text" id="title" required placeholder="e.g. Blinding Lights">
+                    </div>
+                    <div class="form-group">
+                        <label for="artist">Artist</label>
+                        <input type="text" id="artist" required placeholder="e.g. The Weeknd">
+                    </div>
+                    <div class="form-group">
+                        <label for="album-art">Album Art URL (Optional)</label>
+                        <input type="url" id="album-art" placeholder="https://example.com/cover.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="lyrics_en">Lyrics (English)</label>
+                        <textarea id="lyrics_en" rows="8" required
+                            placeholder="Paste English lyrics here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="lyrics_te">Lyrics (Telugu)</label>
+                        <textarea id="lyrics_te" rows="8" placeholder="Paste Telugu lyrics here..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary full-width">Add Song</button>
+                </form>
+            </div>
+        </main>
+
+        <!-- Lyrics Full Page View -->
+        <main id="lyrics-view" class="view hidden">
+            <div class="lyrics-container">
+                <div class="lyrics-nav">
+                    <button id="back-from-lyrics-btn" class="btn-text">← Back to Search</button>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <button id="share-btn" class="btn-secondary" title="Share Lyrics">📷 Share</button>
+                        <div class="lang-toggle">
+                            <button id="lang-en" class="btn-toggle active">English</button>
+                            <button id="lang-te" class="btn-toggle">Telugu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lyrics-content glass-card">
+                    <div class="lyrics-header full-page-header">
+                        <div class="fp-info">
+                            <h1 id="fp-title">Song Title</h1>
+                            <p id="fp-artist">Artist Name</p>
+                        </div>
+                    </div>
+                    <div class="lyrics-body full-page-body">
+                        <pre id="fp-lyrics">Lyrics go here...</pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">Song added successfully!</div>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
