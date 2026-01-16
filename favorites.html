@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorites | Lines of the Song</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        .fav-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .fav-header h1 {
+            font-size: 2.5rem;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="logo">
+                <a href="index.html"
+                    style="text-decoration:none; color:white; display:flex; align-items:center; gap:8px;">
+                    <span class="logo-icon">✨</span> lines of the song
+                </a>
+            </div>
+
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+
+                <!-- User Menu (Hamburger) -->
+                <div id="user-menu" class="user-menu">
+                    <div id="hamburger-btn" class="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div id="dropdown-menu" class="dropdown-menu hidden">
+                        <a href="index.html" class="dropdown-item">Home</a>
+                        <a href="#" id="menu-logout-btn" class="dropdown-item">Log Out</a>
+                    </div>
+                </div>
+        </header>
+
+        <!-- Favorites View -->
+        <main id="favorites-view" class="view">
+            <div class="fav-header">
+                <h1>My Favorite Songs</h1>
+            </div>
+
+            <div id="favorites-grid" class="songs-grid">
+                <!-- Songs injected here -->
+                <div style="color:var(--text-secondary); grid-column:1/-1;">Loading favorites...</div>
+            </div>
+        </main>
+
+        <!-- Lyrics Full Page View (Hidden initially) -->
+        <main id="lyrics-view" class="view hidden">
+            <div class="lyrics-container">
+                <div class="lyrics-nav">
+                    <button id="back-from-lyrics-btn" class="btn-text">← Back to Favorites</button>
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <button id="share-btn" class="btn-secondary" title="Share Lyrics">📷 Share</button>
+                        <div class="lang-toggle">
+                            <button id="lang-en" class="btn-toggle active">English</button>
+                            <button id="lang-te" class="btn-toggle">Telugu</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lyrics-content glass-card">
+                    <div class="lyrics-header full-page-header">
+                        <div class="fp-info">
+                            <h1 id="fp-title">Song Title</h1>
+                            <p id="fp-artist">Artist Name</p>
+                        </div>
+                    </div>
+                    <div class="lyrics-body full-page-body">
+                        <pre id="fp-lyrics">Lyrics go here...</pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script type="module" src="favorites.js"></script>
+</body>
+
+</html>

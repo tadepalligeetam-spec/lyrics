@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lines of the Song | Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="logo">
+                <span class="logo-icon">✨</span> lines of the song
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Light/Dark Mode">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+                <a href="index.html" class="btn-text">Back to Home</a>
+            </div>
+        </header>
+
+        <script>
+            // Theme Logic for Login Page
+            const initTheme = () => {
+                const theme = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', theme);
+
+                const toggleBtn = document.getElementById('theme-toggle');
+                if (toggleBtn) {
+                    toggleBtn.addEventListener('click', () => {
+                        const current = document.documentElement.getAttribute('data-theme');
+                        const next = current === 'dark' ? 'light' : 'dark';
+                        document.documentElement.setAttribute('data-theme', next);
+                        localStorage.setItem('theme', next);
+                    });
+                }
+            };
+            initTheme();
+        </script>
+
+        <!-- Login View -->
+        <main id="login-page-view" class="view">
+            <div class="login-container">
+                <div class="login-card glass-card">
+                    <div class="login-header">
+                        <h2>Log In</h2>
+                        <p>Login to continue</p>
+                    </div>
+                    <form id="page-login-form">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" required placeholder="Enter password">
+                        </div>
+                        <button type="submit" class="btn-primary full-width">Sign In</button>
+                        <button type="button" id="google-login-btn" class="btn-secondary full-width"
+                            style="margin-top: 10px;">Continue with Google</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script>
+        // Simple Login Logic for separate page
+        const loginForm = document.getElementById('page-login-form');
+        const googleBtn = document.getElementById('google-login-btn');
+        const toast = document.getElementById('toast');
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const submitBtn = loginForm.querySelector('button[type="submit"]');
+
+            // Loading State
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "Signing In...";
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                // Admin Credentials Check
+                if (email === 'tadepalligeetam@gmail.com' && password === 'geetam@23') {
+                    localStorage.setItem('isAuthenticated', 'true');
+                    localStorage.setItem('userRole', 'admin');
+                    showToast("Welcome Admin! Redirecting...");
+                    setTimeout(() => {
+                        window.location.href = 'adminpanel.html';
+                    }, 1000);
+                }
+                // Regular User Login (Mock for any other valid email/pass)
+                else if (email && password) {
+                    if (email === 'tadepalligeetam@gmail.com') {
+                        // Correct email but wrong password
+                        showToast("Invalid Admin Password");
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    } else {
+                        // Any other user
+                        localStorage.setItem('isAuthenticated', 'true');
+                        localStorage.setItem('userRole', 'user');
+                        showToast("Login Successful! Redirecting...");
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 1000);
+                    }
+                } else {
+                    showToast("Please fill in all fields");
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            }, 800); // Fake network delay
+        });
+
+        googleBtn.addEventListener('click', () => {
+            localStorage.setItem('isAuthenticated', 'true');
+            localStorage.setItem('userRole', 'user');
+            showToast("Google Login successful! Redirecting...");
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>
